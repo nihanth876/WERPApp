@@ -9,14 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Signin"/>
+        <activity android:name=".Signin"
+            android:theme="@style/Hello"/>
 
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Register"/>
+        <activity android:name=".Register"
+            android:theme="@style/Hello"/>
         <activity android:name=".Splash"
             android:theme="@style/Hello">
         <intent-filter>
