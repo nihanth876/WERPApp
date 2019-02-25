@@ -1,4 +1,4 @@
-package com.example.nihanth.werpapp;
+package com.example.mariyam.werp;
 
 import org.junit.Test;
 
