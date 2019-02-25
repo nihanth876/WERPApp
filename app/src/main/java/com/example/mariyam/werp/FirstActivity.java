@@ -34,14 +34,15 @@ public class FirstActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         mAuth.signOut();
                         startActivity(new Intent(FirstActivity.this,Signin.class));
+                        finish();
 
                     }
                 });alert.show();
-               /* mAuth.signOut();
-                startActivity(new Intent(Firstactivity.this,Signin.class));
-                finish();*/
+
+
 
             }
+
         });
     }
 }

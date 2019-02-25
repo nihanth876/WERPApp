@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -91,7 +92,16 @@ public class Register extends AppCompatActivity {
 
                             sendemailverfication();
                         }else{
-                            Toast.makeText(Register.this,"Registration failed",Toast.LENGTH_SHORT).show();
+
+                            if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                                mprogress.dismiss();
+                                Toast.makeText(Register.this,"Email is already registered.Use another mail",Toast.LENGTH_SHORT).show();
+                            }else{
+                                mprogress.dismiss();
+                                Toast.makeText(Register.this,"Registration failed",Toast.LENGTH_SHORT).show();
+
+                            }
+                           // Toast.makeText(Register.this,"Registration failed",Toast.LENGTH_SHORT).show();
                         }
 
                     }

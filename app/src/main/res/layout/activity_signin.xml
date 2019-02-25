@@ -30,10 +30,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:drawableLeft="@drawable/ic_mail_black_envelope_symbol"
                 android:ems="10"
                 android:fontFamily="@font/poppins_semibold"
-                android:hint="Username"
+                android:hint="Email"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black" />
 
