@@ -55,26 +55,33 @@ public class Signin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        mAuthListener=new FirebaseAuth.AuthStateListener() {
+      /*  mAuthListener=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 mUser=firebaseAuth.getCurrentUser();
 
                 if(mUser!=null){
-                    Toast.makeText(Signin.this,"Signed in",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(Signin.this,FirstActivity.class));
-                    finish();
+                    String email=loginemail.getText().toString();
+                    String pwd=loginpassword.getText().toString();
 
-                }else {
+                    login(email,pwd);
+
+                    /*Toast.makeText(Signin.this,"Signed in",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(Signin.this,FirstActivity.class));
+                    finish();*/
+
+               /* }else {
                     Toast.makeText(Signin.this,"Not Signed In",Toast.LENGTH_LONG).show();
                 }
 
             }
-        };
+        };*/
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(!TextUtils.isEmpty(loginemail.getText().toString()) && !TextUtils.isEmpty(loginpassword.getText().toString())){
+
                     mProgressDialog.setMessage("Logging in");
                     mProgressDialog.show();
 
@@ -82,6 +89,7 @@ public class Signin extends AppCompatActivity {
                     String pwd=loginpassword.getText().toString();
 
                     login(email,pwd);
+
                 }else{
                     mProgressDialog.dismiss();
                     Toast.makeText(Signin.this,"Enter all the entries",Toast.LENGTH_SHORT).show();
@@ -116,11 +124,16 @@ public class Signin extends AppCompatActivity {
         FirebaseUser firebaseUser=mAuth.getInstance().getCurrentUser();
         Boolean emailverified=firebaseUser.isEmailVerified();
         if(emailverified){
-            startActivity(new Intent(this,FirstActivity.class));
             finish();
+            startActivity(new Intent(this,FirstActivity.class));
+
         }else{
+             mProgressDialog.dismiss();
+
             Toast.makeText(this,"Verify your mail",Toast.LENGTH_SHORT).show();
+           // mProgressDialog.dismiss();
             mAuth.signOut();
+
         }
 
     }
@@ -161,14 +174,17 @@ public class Signin extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+       // mAuth.addAuthStateListener(mAuthListener);
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(mAuthListener!=null){
-            mAuth.removeAuthStateListener(mAuthListener);
+    private void updateUI(FirebaseUser currentUser) {
+        if (currentUser != null) {
+            Intent i = new Intent(Signin.this,FirstActivity.class);
+            startActivity(i);
+            this.finish();
         }
     }
+
+
 }
