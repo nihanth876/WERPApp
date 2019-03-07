@@ -90,4 +90,4 @@ private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
        Uri personPhoto = acct.getPhotoUrl();
         }
      }
-  }
+   }
